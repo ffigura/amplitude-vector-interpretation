@@ -31,6 +31,6 @@ can be adapted in the script `Mid_I_D_plot.py`.
     Amplitude of the anomaly vector.
 
 - figures:
-    Fig_2.png (a) Total-field anomaly. (b) Total-gradient. (c) Amplitude of the magnetic anomaly vector.
-    Fig_2b.png (a) Predicted data. (b) Residuals. (c) Histogram of the residuals.
+    Fig_3.png (a) Total-field anomaly. (b) Total-gradient. (c) Amplitude of the magnetic anomaly vector.
+    Fig_3b.png (a) Predicted data. (b) Residuals. (c) Histogram of the residuals.
 					 
