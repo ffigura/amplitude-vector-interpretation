@@ -1,6 +1,7 @@
 # Synthetic test 1 – Simulated field at high latitude and induced magnetization
 
-Running the code `High_I_D.py` will allow the reprodution of the results.
+Running the code `generate_input.py` will generate the input data and the code
+`High_I_D.py` will allow the reprodution of the results.
 The figures generated may differ from the publication and 
 can be adapted in the script `High_I_D_plot.py`.
 
