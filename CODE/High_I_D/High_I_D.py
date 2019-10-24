@@ -22,7 +22,7 @@ Parameters:
         Zj - a float number. 
                                   
     - Regularizing parameter:
-        lambda - a float number. 
+        lambida - a float number. 
 
 Output:
     - parameters.dat 
