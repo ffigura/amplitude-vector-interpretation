@@ -44,8 +44,6 @@ import gc
 import matplotlib.mlab as mlab
 
 shape = (116, 97)
-#Set the inclination and declination of the regional field
-inc_o, dec_o = 90., 0.  
 
 input_data=np.loadtxt('input_mag.dat')
 
