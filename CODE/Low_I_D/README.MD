@@ -1,12 +1,13 @@
 # Synthetic test 3 – Simulated field at low latitude and remanent magnetization
 
-Running the code `Mid_I_D.py` will allow the reprodution of the results.
+Running the code `generate_input.py` will generate the input data and the code 
+`Mid_I_D.py` will allow the reprodution of the results.
 The figures generated may differ from the publication and 
 can be adapted in the script `Mid_I_D_plot.py`.
 
 ## Input:
 
-- input - input_data.dat (is generated in the main file)
+- input_data.dat - is generated in the file `generate_input.py`
 
 ## Parameters:
 
