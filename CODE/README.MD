@@ -76,7 +76,7 @@ The programs are compatible with both Python 2.7.
  
 4 - Parameterization
 ----------------------
-There are the two parameters that need to be defined: the depth of the equivalent layer and the regularization parameter.
+There are the two parameters that need to be defined: the depth of the equivalent layer and the regularizing parameter.
 
 5 - Running the files
 ----------------------
