@@ -2,7 +2,7 @@
 
 by Felipe F. Melo, Shayane P. Gonzalez, Valéria C. F. Barbosa and Vanderlei C. Oliveira Jr (Observatório Nacional) (2019)
 
-Email: felipe146@hotmail.com (F.F. Melo); valcris@on.br (V.C.F. Barbosa) 
+Email: felipe146@hotmail.com (F.F. Melo)
 
 This repository contains a collection of Python codes and synthetic data 
 example for a paper about the open-source package to compute the aplitude of the magnetic anomaly vector .The 
