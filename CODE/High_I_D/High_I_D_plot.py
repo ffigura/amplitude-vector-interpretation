@@ -29,10 +29,10 @@ Input:
 
 Output:
     Figures: 
-        Fig_3.png (a) Total-field anomaly. (b) Total-gradient. 
+        Fig_2.png (a) Total-field anomaly. (b) Total-gradient. 
         (c) Amplitude of the magnetic anomaly vector. 
         
-        Fig_3b.png (a) Predicted data. (b) Residuals. 
+        Fig_2b.png (a) Predicted data. (b) Residuals. 
         (c) Histogram of the residuals.
 """
 from __future__ import division
