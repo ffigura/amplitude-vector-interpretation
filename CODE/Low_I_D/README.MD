@@ -15,7 +15,7 @@ can be adapted in the script `Low_I_D_plot.py`.
     Zj - a float number. 
                                   
 - Regularizing parameter:
-    lambda - a float number. 
+    lambida - a float number. 
 
 ## Outputs:
 
