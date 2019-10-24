@@ -6,7 +6,7 @@ can be adapted in the script `High_I_D_plot.py`.
 
 ## Input:
 
-- input - input_data.dat (is generated in the main file)
+- input_data.dat - is generated in the file `generate_input.py`
 
 ## Parameters:
 
