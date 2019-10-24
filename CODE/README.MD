@@ -48,18 +48,18 @@ Outputs:
  
 	- figures - all figures that generated the synthetic example in the manuscript will be saved.
   
-  - input_mag.dat 
+  	- input_mag.dat 
 		Synthetic magnetic data generated using the Python packaged "Fatiando a Terra":	
 		http://fatiando.org/. This data is an example used in the current publication.
 	
-  - parameters.dat 
+  	- parameters.dat 
 		The parameters estimated with the equivalent layer.
 
-  - predict.dat 
+  	- predict.dat 
 		The predicted data, from the total field-anomaly, with the equivalent layer.
 
-  - amplitude.dat 
-		The computer amplitude of the magnetic anomaly vector.
+  	- amplitude.dat 
+		The amplitude of the magnetic anomaly vector.
 
 3 - Prerequisites
 ----------------------
