@@ -78,7 +78,7 @@ GTG = np.dot(G.T, G)
 GTd = np.dot(G.T,tf)
 
 # Estimation of parameter p (overdetermined)
-lambida=1e-16
+lambida=1e-15
 I = np.identity(M)
 
 p = np.linalg.solve(GTG + lambida*I, GTd)
