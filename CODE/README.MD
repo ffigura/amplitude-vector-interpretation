@@ -37,12 +37,14 @@ The synthetic tests can be reproduced with these codes. The tests can be reprodu
 
 Python codes:
 
-	- X.py: General Python module containing the functions to compute the forward model,
-    the equivalent layer, estimate the parameters, compute the three orthogonal vectors and
-    the amplitude. The "X" stands for the latitude of the test, eg., "High_I_D", "Mid_I_D" and "Low_I_D".
+	- generate_input.py: Python code to compute the forward model.
+
+	- X_I_D.py: General Python module containing the functions to compute the equivalent layer,
+	estimate the parameters, compute the predicted data, the three orthogonal vectors and
+        the amplitude. The "X" stands for the latitude of the test, eg., "High_I_D", "Mid_I_D" and "Low_I_D".
 	
-	- X_plot.py: Plot the results.
-    The "X" stands for the latitude of the test, eg., "High_I_D", "Mid_I_D" and "Low_I_D".
+	- X__I_D_plot.py: Plot the results.
+    	The "X" stands for the latitude of the test, eg., "High_I_D", "Mid_I_D" and "Low_I_D".
 	
 Outputs: 
  
@@ -52,9 +54,6 @@ Outputs:
 		Synthetic magnetic data generated using the Python packaged "Fatiando a Terra":	
 		http://fatiando.org/. This data is an example used in the current publication.
 	
-  	- parameters.dat 
-		The parameters estimated with the equivalent layer.
-
   	- predict.dat 
 		The predicted data, from the total field-anomaly, with the equivalent layer.
 
@@ -89,22 +88,30 @@ There are two easy ways to run the synthetic tests:
 
 	1.1 On linux based systems open the command prompt windows (terminal), and run the command:
 	
-	On Python 2.7: python High_I_D_plot.py 
-	On Python 3.7: python3 High_I_D_plot.py 
+	On Python 2.7: python generate_input.py  
+		       python High_I_D.py  
+		       python High_I_D_plot.py
+	
+	High_I_D_plot.py 
+	On Python 3.7: python3 generate_input.py 
+		       python3 High_I_D.py 
+		       python3 High_I_D_plot.py 
 
 	1.2 On windows based systems open the Iphyton console (Python 2.7) or 
 	Anaconda Navigator and then Jupyter QtConsole (Python 3.7), and run the command:
 
+	run generate_input.py 
+	run High_I_D.py 
 	run High_I_D_plot.py
 
 2. Open the Spyder program that comes with the Ananconda installation. In the Spyder, open
-the example script "High_I_D_plot.py" and click in "play" inside the Spyder to execute it.
+the example scripts, one per time, "generate_input.py", "High_I_D.py" and "High_I_D_plot.py" and click in "play" inside the Spyder to execute it.
 
-If everything runs ok, the figures shown in the publication will be saved in the same folder of the code.
+If everything runs ok, the outputs and figures shown in the publication will be saved in the same folder of the code.
 
-The file `High_I_D.py` is a Python-based command line script. By using this 
-script, the figures of the synthetic test presented in the publication can be reproduced.
-The figures generated may differ from the publication and can be adapted in the script `High_I_D_plot.py`.
+The files `generate_input.py`, `X_I_D.py` and `X_I_D_plot.py` are Python-based command line scripts. By using this 
+script, the outputs and figures of the synthetic test presented in the publication can be reproduced.
+The figures generated may differ from the publication and can be adapted in the script `X_I_D_plot.py`.
 
 6 - License
 ----------------------
