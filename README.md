@@ -7,7 +7,7 @@ Felipe F. Melo, Shayane P. Gonzalez, Valéria C. F. Barbosa and Vanderlei C. Oli
 
 This paper has been submitted for publication in the journal *Journal of Applied Geophysics*.
 
-This repository contains the source code to perform the synthetic tests presented. The codes `Test_High_I_D.py`, `Test_Mid_I_D.py` and `Test_Low_I_D.py` the synthetic data `input_mag.dat` presented in the paper and the codes `Test_High_I_D_plot.py`, `Test_Mid_I_D_plot.py` and `Test_Low_I_D_plot` to generate the figures of the synthetic test.
+This repository contains the source code to perform the synthetic tests presented. The `generate_input.py` generates the synthetic data, the codes `High_I_D.py`, `Mid_I_D.py` and `Low_I_D.py` compute the amplitude of the magnetic anomaly vector andthe codes `High_I_D_plot.py`, `Mid_I_D_plot.py` and `Low_I_D_plot.py` generate the figures of the synthetic test.
 
 The programs are compatible with Python 2.7 programming language.
  
@@ -17,10 +17,13 @@ We propose the use of the amplitude of the magnetic vector for qualitative inter
 
 ## Content
 
-- Test_X.py:
-	General Python module containing the functions to compute the forward model, the equivalent layer, estimate the parameters, 		compute the three orthogonal vectors and the amplitude. The "X" stands for the inclination of the test, eg., "High_I_D".
+- generate_input.py:
+	Python code to compute the forward model.
+
+- X_I_D.py:
+	General Python module containing the functions to compute the equivalent layer, estimate the parameters, the three orthogonal vectors and the amplitude. The "X" stands for the latitude of the test, eg., "High", "Mid" or "Low".
 	
-- Test_X_plot.py:
+- X_I_D_plot.py:
 	Plot the results.
 	
 Test data:
@@ -42,7 +45,7 @@ or [download a zip archive](https://github.com/ffigura/Euler-deconvolution-pytho
 
 ## Dependencies
 
-The Python program for compute the amplitude of the anomaly vector - "Test_X.py" requires the Python library "numpy" and the last development version of the free Python packaged "Fatiando a Terra" ( https://www.fatiando.org/dev/install.html#installing-the-latest-development-version ). The script "Test_X_plot.py" requires the same Python packages in addtion to "matplotlib". 
+The Python programs for compute the syntehtic data - "generate_input.py" - and the amplitude of the magnetic anomaly vector - "X_I_D.py" - require the Python library "numpy" and the last development version of the free Python packaged "Fatiando a Terra" ( https://www.fatiando.org/dev/install.html#installing-the-latest-development-version ). The script "X_plot.py" requires the same Python packages in addtion to "matplotlib". 
 
 The easier way to get Python and all libraries installed is through the Anaconda Python 
 distribution (https://www.anaconda.com/distribution/). After installed Anaconda, install the libraries 
@@ -55,7 +58,7 @@ The programs are compatible with Python 2.7.
 ## Reproducing the results
 
 The results and figures for the synthetic test are reproducible from the folders `/High_I_D`, `/Mid_I_D` and `/Low_I_D`.
-Running the code `Test_X.py` will allow the reprodution of the results and the code `Test_X_plot.py` will generate the figures. For more information read the file `README.MD` or `README.txt` in the folder `/code`.
+Running the code `generate_input.py` will generate the synthetic data, the code `X_I_D.py` will allow the reprodution of the results and the code `X_I_D_plot.py` will generate the figures. For more information read the file `README.MD` or `README.txt` in the folder `/code`.
 
 ## License
 
