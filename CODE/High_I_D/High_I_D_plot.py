@@ -17,9 +17,6 @@ Input:
     - input_mag.dat
         The input data generated from generate_input.py
 
-    - parameters.dat 
-    	The parameters estimated with the equivalent layer.
-
     - predict.dat 
     	The predicted data, from the total field-anomaly, with the equivalent
         layer.
@@ -31,9 +28,8 @@ Output:
     Figures: 
         Fig_2.png (a) Total-field anomaly. (b) Total-gradient. 
         (c) Amplitude of the magnetic anomaly vector. 
-        
-        Fig_2b.png (a) Predicted data. (b) Residuals. 
-        (c) Histogram of the residuals.
+		(d) Predicted data. (e) Residuals. 
+        (f) Histogram of the residuals.
 """
 from __future__ import division
 import numpy as np
@@ -51,15 +47,11 @@ amplitude_input=np.loadtxt('amplitude.dat')
 
 predict_input=np.loadtxt('predict.dat')
 
-parameters_input=np.loadtxt('parameters.dat')
-
 yi=input_data[:,0]
 xi=input_data[:,1]
 tf=input_data[:,2]
 amplitude=amplitude_input[:,2]
 predict=predict_input[:,2]
-parameters=parameters_input[:,2]
-
 
 '''
 We need the geometry for define the polygons on the plots
@@ -117,9 +109,9 @@ z1_cr, z2_cr = 200, 5000
 TGA = transform.tga(xi, yi, tf, shape, method = 'fd')
 
 
-fig=plt.figure(figsize=(18,4.8))
+fig=plt.figure(figsize=(18,10))
 
-plt.subplot(1,3,1)
+plt.subplot(2,3,1)
 plt.title('(a)',fontsize=14,loc='center')
 rect1 = patches.Rectangle((5.,5.),4.,4.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
 rect2 = patches.Rectangle((y1_L/1000.,x1_L/1000.),(y2_L-y1_L)/1000.,(x2_L-x1_L)/1000.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
@@ -149,7 +141,7 @@ plt.text(11,32,'P2',color='w',weight='bold')
 plt.text(25,25.5,'P3',color='w',weight='bold')
 plt.text(24,10,'P4',color='w',weight='bold')
 
-plt.subplot(1,3,2)
+plt.subplot(2,3,2)
 plt.title('(b)',fontsize=14,loc='center')
 rect1 = patches.Rectangle((5.,5.),4.,4.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
 rect2 = patches.Rectangle((y1_L/1000.,x1_L/1000.),(y2_L-y1_L)/1000.,(x2_L-x1_L)/1000.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
@@ -179,7 +171,7 @@ plt.text(11,32,'P2',color='w',weight='bold')
 plt.text(25,25.5,'P3',color='w',weight='bold')
 plt.text(24,10,'P4',color='w',weight='bold')
 
-plt.subplot(1,3,3)
+plt.subplot(2,3,3)
 plt.title('(c)',fontsize=14,loc='center')
 rect1 = patches.Rectangle((5.,5.),4.,4.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
 rect2 = patches.Rectangle((y1_L/1000.,x1_L/1000.),(y2_L-y1_L)/1000.,(x2_L-x1_L)/1000.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
@@ -209,18 +201,9 @@ plt.text(11,32,'P2',color='w',weight='bold')
 plt.text(25,25.5,'P3',color='w',weight='bold')
 plt.text(24,10,'P4',color='w',weight='bold')
 
-plt.subplots_adjust(wspace=0.25)
-plt.savefig('FIG_2.png',dpi=300,bbox_inches='tight')
-plt.close('all')
-gc.collect()
 
-
-
-
-fig=plt.figure(figsize=(18,4.8))
-
-plt.subplot(1,3,1)
-plt.title('(a)',fontsize=14,loc='center')
+plt.subplot(2,3,4)
+plt.title('(d)',fontsize=14,loc='center')
 rect1 = patches.Rectangle((5.,5.),4.,4.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
 rect2 = patches.Rectangle((y1_L/1000.,x1_L/1000.),(y2_L-y1_L)/1000.,(x2_L-x1_L)/1000.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
 rect3 = patches.Rectangle((y3_L/1000.,x3_L/1000.),(y4_L-y3_L)/1000.,(x4_L-x3_L)/1000.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
@@ -249,8 +232,8 @@ plt.text(11,32,'P2',color='w',weight='bold')
 plt.text(25,25.5,'P3',color='w',weight='bold')
 plt.text(24,10,'P4',color='w',weight='bold')
 
-plt.subplot(1,3,2)
-plt.title('(b)',fontsize=14,loc='center')
+plt.subplot(2,3,5)
+plt.title('(e)',fontsize=14,loc='center')
 rect1 = patches.Rectangle((5.,5.),4.,4.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
 rect2 = patches.Rectangle((y1_L/1000.,x1_L/1000.),(y2_L-y1_L)/1000.,(x2_L-x1_L)/1000.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
 rect3 = patches.Rectangle((y3_L/1000.,x3_L/1000.),(y4_L-y3_L)/1000.,(x4_L-x3_L)/1000.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
@@ -279,8 +262,8 @@ plt.text(11,32,'P2',color='w',weight='bold')
 plt.text(25,25.5,'P3',color='w',weight='bold')
 plt.text(24,10,'P4',color='w',weight='bold')
 
-plt.subplot(1,3,3)
-plt.title('(c)',fontsize=14,loc='center')
+plt.subplot(2,3,6)
+plt.title('(f)',fontsize=14,loc='center')
 
 residuo=tf.reshape(shape)-predict.reshape(shape)
 mu_res=np.mean(residuo)
@@ -298,7 +281,7 @@ plt.text(3,0.6,'$\sigma=%1.2f$'%(sigma_res),color='k',fontsize=18)
 plt.grid(True)
 
 
-plt.subplots_adjust(wspace=0.25)
-plt.savefig('FIG_2b.png',dpi=300,bbox_inches='tight')
+plt.subplots_adjust(hspace=0.3,wspace=0.25)
+plt.savefig('FIG_2.png',dpi=300,bbox_inches='tight')
 plt.close('all')
 gc.collect()
