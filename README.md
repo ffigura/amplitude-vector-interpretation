@@ -38,9 +38,9 @@ Test data:
 You can download a copy of all the files in this repository by cloning the
 [git](https://git-scm.com/) repository:
 
-    git clone https://github.com/ffigura/Euler-deconvolution-python.git
-
-or [download a zip archive](https://github.com/ffigura/Euler-deconvolution-python/archive/master.zip).
+    git clone https://github.com/ffigura/amplitude-vector-interpretation.git
+    
+or [download a zip archive](https://github.com/ffigura/amplitude-vector-interpretation/archive/master.zip).
 
 
 ## Dependencies
