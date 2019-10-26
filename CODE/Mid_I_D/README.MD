@@ -22,9 +22,6 @@ can be adapted in the script `Mid_I_D_plot.py`.
 - input_mag.dat
     The input data generated
     
-- parameters.dat
-    The estimated parameters
-    
 - predict.dat
     The predicted data.
     
@@ -33,5 +30,5 @@ can be adapted in the script `Mid_I_D_plot.py`.
 
 - figures:
     Fig_3.png (a) Total-field anomaly. (b) Total-gradient. (c) Amplitude of the magnetic anomaly vector.
-    Fig_3b.png (a) Predicted data. (b) Residuals. (c) Histogram of the residuals.
+    (d) Predicted data. (e) Residuals. (f) Histogram of the residuals.
 					 
