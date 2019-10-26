@@ -26,9 +26,6 @@ Parameters:
         lambida - a float number. 
 
 Output:
-    - parameters.dat 
-    	The parameters estimated with the equivalent layer.
-
     - predict.dat 
     	The predicted data, from the total field-anomaly, with the equivalent
         layer.
@@ -87,12 +84,6 @@ I = None
 GTd = None
 GTG = None
 predito=np.dot(G,p)
-
-out=[]
-out=np.array([yi,xi,p])        
-out=out.T
-np.savetxt('parameters.dat',out,delimiter=' ',fmt='%1.3f')
-out = None
 
 #Predict data
 out=[]
