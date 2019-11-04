@@ -15,15 +15,20 @@ email: felipe146@hotmail.com, shayanegonzalez@gmail.com
 
 
 Output:
-    input_mag.dat    
+    input_mag.dat - noise corrupted total-field anomaly
+    
+    mag_noise_free.dat - noise free total-field anomaly
+    
+    FIG_input.png - (a) noise corrupted total-field anomaly. 
+    (b) noise free total-field anomaly. (c) residuals.   
 """
 from __future__ import division
 import numpy as np
 from fatiando import mesher, gridder, utils
 from fatiando.gravmag import prism
 
-shape = (116, 97)
-area = (0, 34800, 0, 29100)
+shape = (100, 110)
+area = (0, 20000, 0, 22000)
 xi, yi, zi = gridder.regular(area, shape, z = -150)
 
 #Set the inclination and declination of the regional field
@@ -47,19 +52,19 @@ zo_t=np.linspace(100,2000,40)
 #base
 zo_b=np.linspace(200,2100,40)  
 # south, north
-x1, x2=5000,9000
+x1, x2=3000,7000
 #Magnetization intensity
 mag_m = 7
 
 
 #L shape source
-x1_L, x2_L = 26000, 30000
-y1_L, y2_L = 8000, 8500
+x1_L, x2_L = 13000, 17000
+y1_L, y2_L = 3000, 3500
 #Top and bottom of 1st the prism
 z1_L, z2_L = 200, 1100
 
-x3_L, x4_L = 29500, 30000
-y3_L, y4_L = 8500, 10500
+x3_L, x4_L = 16500, 17000
+y3_L, y4_L = 3500, 5500
 #Top and bottom of 2nd the prism
 z3_L, z4_L = 200, 1100
 #Magnetization intensity
@@ -67,25 +72,25 @@ mag_L = 3
 
 #three sources
 # 1st prism
-x1_c, x2_c = 20000, 24000
-y1_c, y2_c = 16000, 24000
+x1_c, x2_c = 13000, 17000
+y1_c, y2_c = 11000, 19000
 #Top and bottom of 1st the prism
 z1_c, z2_c = 1000, 5000
 # 2nd prism
-x3_c, x4_c = 21500, 22500
-y3_c, y4_c = 21500, 22500
+x3_c, x4_c = 14500, 15500
+y3_c, y4_c = 16500, 17500
 #Top and bottom of 2nd the prism
 z3_c, z4_c = 200, 1000
 # 3rd prism 
-y5_c, y6_c = 17500, 18500
+y5_c, y6_c = 12500, 13500
 #Magnetization intensity
 mag_c = 1.5
 inc_c = 45.
 dec_c = 45.
 
 #vertical prism
-x1_cr, x2_cr = 11000, 13000
-y1_cr, y2_cr = 19000, 21000
+x1_cr, x2_cr = 4000, 6000
+y1_cr, y2_cr = 14000, 16000
 z1_cr, z2_cr = 200, 5000
 #Magnetization intensity
 mag_cr = 1.5
@@ -147,12 +152,120 @@ model_mag = [
 
 
 #total field from Fatiando a Terra
-tf = utils.contaminate(prism.tf(xi, yi, zi, model_mag,inc_o, dec_o),0.0001,
-                       percent=True)
+tf,stdv = utils.contaminate(prism.tf(xi, yi, zi, model_mag,inc_o, dec_o),
+                            1,percent=False,return_stddev=True)
 
-
+print stdv
 #save for the plot
-out=np.array([yi,xi,tf])        
+out=np.array([yi,xi,zi,tf])        
 out=out.T
 np.savetxt('input_mag.dat',out,delimiter=' ',fmt='%1.8f')
 out = None
+
+tf_noise_free = prism.tf(xi, yi, zi, model_mag,inc_o, dec_o)
+
+out=np.array([yi,xi,zi,tf])        
+out=out.T
+np.savetxt('mag_noise_free.dat',out,delimiter=' ',fmt='%1.8f')
+out = None
+
+
+from matplotlib import pyplot as plt
+import matplotlib.patches as patches
+
+#input, input noise free, noise
+fig=plt.figure(figsize=(17,3.8))
+
+plt.subplot(1,3,1)
+plt.title('(a)',fontsize=14,loc='center')
+rect1 = patches.Rectangle((vety[0]/1000.,x1/1000.),4.,4.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
+rect2 = patches.Rectangle((y1_L/1000.,x1_L/1000.),(y2_L-y1_L)/1000.,(x2_L-x1_L)/1000.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
+rect3 = patches.Rectangle((y3_L/1000.,x3_L/1000.),(y4_L-y3_L)/1000.,(x4_L-x3_L)/1000.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
+rect4 = patches.Rectangle((y1_c/1000.,x1_c/1000.),(y2_c-y1_c)/1000.,(x2_c-x1_c)/1000.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
+rect5 = patches.Rectangle((y3_c/1000.,x3_c/1000.),(y4_c-y3_c)/1000.,(x4_c-x3_c)/1000.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
+rect6 = patches.Rectangle((y1_cr/1000.,x1_cr/1000.),(y2_cr-y1_cr)/1000.,(x2_cr-x1_cr)/1000.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
+rect7 = patches.Rectangle((y5_c/1000.,x3_c/1000.),(y6_c-y5_c)/1000.,(x4_c-x3_c)/1000.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
+
+im=plt.contourf(yi.reshape(shape)/1000.,xi.reshape(shape)/1000.,tf.reshape(shape), 30, cmap='jet')
+ax=plt.gca()
+ax.set_ylabel('Northing (km)', fontsize = 14)
+ax.set_xlabel('Easting (km)', fontsize = 14)
+ax.tick_params(labelsize=13)
+ax.add_patch(rect1)
+ax.add_patch(rect2)
+ax.add_patch(rect3)
+ax.add_patch(rect4)
+ax.add_patch(rect5)
+ax.add_patch(rect6)
+ax.add_patch(rect7)
+cbar=fig.colorbar(im,pad=0.01,shrink=1)
+cbar.set_label('nT',labelpad=-35,y=-0.04, rotation=0,fontsize=13)
+cbar.ax.tick_params(labelsize=13)
+plt.text(1,5,'P1',color='w',weight='bold')
+plt.text(8,17,'P2',color='w',weight='bold')
+plt.text(20,17,'P3',color='w',weight='bold')
+plt.text(19,5,'P4',color='w',weight='bold')
+
+plt.subplot(1,3,2)
+plt.title('(b)',fontsize=14,loc='center')
+rect1 = patches.Rectangle((vety[0]/1000.,x1/1000.),4.,4.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
+rect2 = patches.Rectangle((y1_L/1000.,x1_L/1000.),(y2_L-y1_L)/1000.,(x2_L-x1_L)/1000.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
+rect3 = patches.Rectangle((y3_L/1000.,x3_L/1000.),(y4_L-y3_L)/1000.,(x4_L-x3_L)/1000.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
+rect4 = patches.Rectangle((y1_c/1000.,x1_c/1000.),(y2_c-y1_c)/1000.,(x2_c-x1_c)/1000.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
+rect5 = patches.Rectangle((y3_c/1000.,x3_c/1000.),(y4_c-y3_c)/1000.,(x4_c-x3_c)/1000.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
+rect6 = patches.Rectangle((y1_cr/1000.,x1_cr/1000.),(y2_cr-y1_cr)/1000.,(x2_cr-x1_cr)/1000.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
+rect7 = patches.Rectangle((y5_c/1000.,x3_c/1000.),(y6_c-y5_c)/1000.,(x4_c-x3_c)/1000.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
+
+im=plt.contourf(yi.reshape(shape)/1000.,xi.reshape(shape)/1000.,tf_noise_free.reshape(shape), 30, cmap='jet')
+ax=plt.gca()
+ax.set_ylabel('Northing (km)', fontsize = 14)
+ax.set_xlabel('Easting (km)', fontsize = 14)
+ax.tick_params(labelsize=13)
+ax.add_patch(rect1)
+ax.add_patch(rect2)
+ax.add_patch(rect3)
+ax.add_patch(rect4)
+ax.add_patch(rect5)
+ax.add_patch(rect6)
+ax.add_patch(rect7)
+cbar=fig.colorbar(im,pad=0.01,shrink=1)
+cbar.set_label('nT',labelpad=-35,y=-0.04, rotation=0,fontsize=13)
+cbar.ax.tick_params(labelsize=13)
+plt.text(1,5,'P1',color='w',weight='bold')
+plt.text(8,17,'P2',color='w',weight='bold')
+plt.text(20,17,'P3',color='w',weight='bold')
+plt.text(19,5,'P4',color='w',weight='bold')
+
+plt.subplot(1,3,3)
+plt.title('(c)',fontsize=14,loc='center')
+rect1 = patches.Rectangle((vety[0]/1000.,x1/1000.),4.,4.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
+rect2 = patches.Rectangle((y1_L/1000.,x1_L/1000.),(y2_L-y1_L)/1000.,(x2_L-x1_L)/1000.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
+rect3 = patches.Rectangle((y3_L/1000.,x3_L/1000.),(y4_L-y3_L)/1000.,(x4_L-x3_L)/1000.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
+rect4 = patches.Rectangle((y1_c/1000.,x1_c/1000.),(y2_c-y1_c)/1000.,(x2_c-x1_c)/1000.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
+rect5 = patches.Rectangle((y3_c/1000.,x3_c/1000.),(y4_c-y3_c)/1000.,(x4_c-x3_c)/1000.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
+rect6 = patches.Rectangle((y1_cr/1000.,x1_cr/1000.),(y2_cr-y1_cr)/1000.,(x2_cr-x1_cr)/1000.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
+rect7 = patches.Rectangle((y5_c/1000.,x3_c/1000.),(y6_c-y5_c)/1000.,(x4_c-x3_c)/1000.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
+
+im=plt.contourf(yi.reshape(shape)/1000.,xi.reshape(shape)/1000.,(tf-tf_noise_free).reshape(shape), 30, cmap='jet')
+ax=plt.gca()
+ax.set_ylabel('Northing (km)', fontsize = 14)
+ax.set_xlabel('Easting (km)', fontsize = 14)
+ax.tick_params(labelsize=13)
+ax.add_patch(rect1)
+ax.add_patch(rect2)
+ax.add_patch(rect3)
+ax.add_patch(rect4)
+ax.add_patch(rect5)
+ax.add_patch(rect6)
+ax.add_patch(rect7)
+cbar=fig.colorbar(im,pad=0.01,shrink=1)
+cbar.set_label('nT',labelpad=-30,y=-0.04, rotation=0,fontsize=13)
+cbar.ax.tick_params(labelsize=13)
+plt.text(1,5,'P1',color='w',weight='bold')
+plt.text(8,17,'P2',color='w',weight='bold')
+plt.text(20,17,'P3',color='w',weight='bold')
+plt.text(19,5,'P4',color='w',weight='bold')
+
+plt.subplots_adjust(wspace=0.25)
+plt.savefig('FIG_input.png',dpi=300,bbox_inches='tight')
+plt.close('all')
