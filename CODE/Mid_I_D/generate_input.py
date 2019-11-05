@@ -1,8 +1,8 @@
 """
-Synthetic test 3
+Synthetic test 2
 
 A Python program to generate the input for the
-Synthetic test 3 – Simulated field at low latitude and remanent magnetization
+Synthetic test 2 - Simulated field at mid-latitude and remanent magnetization
 
 This code is released from the paper: 
 Amplitude of the magnetic anomaly vector in the interpretation
@@ -32,9 +32,9 @@ area = (0, 20000, 0, 22000)
 xi, yi, zi = gridder.regular(area, shape, z = -150)
 
 #Set the inclination and declination of the regional field
-inc_o, dec_o = -8., -20.  
+inc_o, dec_o = 45., 45.  
 # Set the inclination and declination of the source
-inc_s, dec_s = -8., -20.  
+inc_s, dec_s = 45., 45.  
 
 # Dipping source
 vety=np.linspace(5000,9000,41)
@@ -164,21 +164,20 @@ out = None
 
 tf_noise_free = prism.tf(xi, yi, zi, model_mag,inc_o, dec_o)
 
-out=np.array([yi,xi,zi,tf])        
+out=np.array([yi,xi,zi,tf_noise_free])        
 out=out.T
 np.savetxt('mag_noise_free.dat',out,delimiter=' ',fmt='%1.8f')
 out = None
-
 
 from matplotlib import pyplot as plt
 import matplotlib.patches as patches
 
 #input, input noise free, noise
-fig=plt.figure(figsize=(17,3.8))
+fig=plt.figure(figsize=(18,4.8))
 
 plt.subplot(1,3,1)
 plt.title('(a)',fontsize=14,loc='center')
-rect1 = patches.Rectangle((vety[0]/1000.,x1/1000.),4.,4.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
+rect1 = patches.Rectangle((5.,5.),4.,4.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
 rect2 = patches.Rectangle((y1_L/1000.,x1_L/1000.),(y2_L-y1_L)/1000.,(x2_L-x1_L)/1000.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
 rect3 = patches.Rectangle((y3_L/1000.,x3_L/1000.),(y4_L-y3_L)/1000.,(x4_L-x3_L)/1000.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
 rect4 = patches.Rectangle((y1_c/1000.,x1_c/1000.),(y2_c-y1_c)/1000.,(x2_c-x1_c)/1000.,linewidth=1,edgecolor='black',linestyle='-',facecolor='none')
@@ -199,7 +198,7 @@ ax.add_patch(rect5)
 ax.add_patch(rect6)
 ax.add_patch(rect7)
 cbar=fig.colorbar(im,pad=0.01,shrink=1)
-cbar.set_label('nT',labelpad=-35,y=-0.04, rotation=0,fontsize=13)
+cbar.set_label('nT',labelpad=-21,y=-0.03, rotation=0,fontsize=13)
 cbar.ax.tick_params(labelsize=13)
 plt.text(1,5,'P1',color='w',weight='bold')
 plt.text(8,17,'P2',color='w',weight='bold')
@@ -229,7 +228,7 @@ ax.add_patch(rect5)
 ax.add_patch(rect6)
 ax.add_patch(rect7)
 cbar=fig.colorbar(im,pad=0.01,shrink=1)
-cbar.set_label('nT',labelpad=-35,y=-0.04, rotation=0,fontsize=13)
+cbar.set_label('nT',labelpad=-15,y=-0.03, rotation=0,fontsize=13)
 cbar.ax.tick_params(labelsize=13)
 plt.text(1,5,'P1',color='w',weight='bold')
 plt.text(8,17,'P2',color='w',weight='bold')
@@ -259,7 +258,7 @@ ax.add_patch(rect5)
 ax.add_patch(rect6)
 ax.add_patch(rect7)
 cbar=fig.colorbar(im,pad=0.01,shrink=1)
-cbar.set_label('nT',labelpad=-30,y=-0.04, rotation=0,fontsize=13)
+cbar.set_label('nT',labelpad=-20,y=-0.03, rotation=0,fontsize=13)
 cbar.ax.tick_params(labelsize=13)
 plt.text(1,5,'P1',color='w',weight='bold')
 plt.text(8,17,'P2',color='w',weight='bold')
