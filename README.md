@@ -7,7 +7,7 @@ Felipe F. Melo, Shayane P. Gonzalez, Valéria C. F. Barbosa and Vanderlei C. Oli
 
 This paper has been submitted for publication in the journal *Journal of Applied Geophysics*.
 
-This repository contains the source code to perform the synthetic tests presented. The `generate_input.py` generates the synthetic data, the codes `High_I_D.py`, `Mid_I_D.py` and `Low_I_D.py` compute the amplitude of the magnetic anomaly vector andthe codes `High_I_D_plot.py`, `Mid_I_D_plot.py` and `Low_I_D_plot.py` generate the figures of the synthetic test.
+This repository contains a first version of the source code to perform the synthetic tests presented. The `generate_input.py` generates the synthetic data, the codes `High_I_D.py`, `Mid_I_D.py` and `Low_I_D.py` compute the amplitude of the magnetic anomaly vector andthe codes `High_I_D_plot.py`, `Mid_I_D_plot.py` and `Low_I_D_plot.py` generate the figures of the synthetic test.
 
 The programs are compatible with Python 2.7 programming language.
  
